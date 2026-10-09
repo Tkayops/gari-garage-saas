@@ -11,7 +11,7 @@
     btn.disabled = true;
     const r = await fetch('/api/auth/reset', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token, password: a.inp.value }) });
     const d = await r.json().catch(() => ({}));
-    if (r.ok) { root.replaceChildren(h('div', { class: 'auth' }, h('div', { class: 'box' }, h('h1', { id: 'done', text: 'Password updated' }), h('p', { class: 'sub', text: 'You\u2019ve been signed out everywhere. Sign in with your new password.' }), h('a', { class: 'btn primary', href: '/', text: 'Go to sign in' })))); return; }
+    if (r.ok) { root.replaceChildren(h('div', { class: 'auth' }, h('div', { class: 'box' }, h('h1', { id: 'done', text: 'Password updated' }), h('p', { class: 'sub', text: 'You\u2019ve been signed out everywhere. Sign in with your new password.' }), h('a', { class: 'btn primary', href: '/app', text: 'Go to sign in' })))); return; }
     btn.disabled = false; err(d.field === 'password' ? a : b, d.error || 'Something went wrong');
   });
   root.append(h('div', { class: 'auth' }, h('div', { class: 'box' }, h('div', { class: 'brand' }, h('i'), 'Gari'), h('h1', { text: 'Choose a new password' }), h('p', { class: 'sub', text: 'This link works once and expires 30 minutes after it was sent.' }), form)));

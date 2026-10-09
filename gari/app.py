@@ -177,6 +177,9 @@ def create_app(db_path=None, secret=None):
 
     # ---------- public / auth ----------
     @app.get("/")
+    def landing(): return send_from_directory(app.static_folder, "landing.html")
+
+    @app.get("/app")
     def index(): return send_from_directory(app.static_folder, "index.html")
 
     @app.get("/q/<token>")

@@ -78,7 +78,7 @@ const confirmBox = (title, text, onYes, yes = 'Confirm') => formModal({ title, f
 
 /* ---------- auth ---------- */
 function renderAuth() {
-  let mode = 'in';
+  let mode = location.hash === '#signup' ? 'up' : 'in';
   const shell = (...kids) => root.replaceChildren(h('div', { class: 'auth' }, h('div', { class: 'box' }, h('div', { class: 'brand' }, h('i'), 'Gari'), kids)));
   const drawForgot = () => {
     const em = field('Email', 'email', { type: 'email', auto: 'username' });
@@ -148,14 +148,14 @@ PAGES.workshop = async m => {
   const jobs = await api('/jobs?status=open');
   const cols = STAGES.map(st => {
     const list = jobs.filter(j => j.status === st), c = `var(--s-${st})`;
-    return h('section', { class: 'lane', style: { '--c': c }, 'aria-label': LABEL[st] }, h('header', {}, h('span', { text: LABEL[st] }), h('b', { class: 'num', text: list.length })),
-      list.length ? list.map(j => h('button', { class: 'card', style: { '--c': c }, onclick: () => openJob(j.id), 'data-job': j.number },
+    return h('section', { class: 'lane' + (list.length ? '' : ' none'), style: { '--c': c }, 'aria-label': LABEL[st] }, h('header', {}, h('span', { text: LABEL[st] }), h('b', { class: 'num', text: list.length })),
+      h('div', { class: 'cards' }, list.length ? list.map(j => h('button', { class: 'card', style: { '--c': c }, onclick: () => openJob(j.id), 'data-job': j.number },
         h('div', { class: 't' }, plate(j.plate), h('span', { class: 'small muted num', text: ago(j.updated_at) })),
         h('div', { style: { fontWeight: 500 }, text: [j.make, j.model].filter(Boolean).join(' ') || j.customer }),
         h('p', { text: j.complaint }),
         h('div', { class: 'm' }, h('span', { text: j.mechanic || 'Unassigned' }), isStaff() && j.totals.subtotal ? h('span', { class: 'num', text: kes(j.totals.total) }) : null),
         j.needs_reapproval ? h('div', { style: { marginTop: '8px' } }, h('span', { class: 'tag warn', text: 'Extra work needs approval' })) : null,
-        dots(STAGES.indexOf(st) + 1, STAGES.length, c, 24))) : h('div', { class: 'empty', text: 'Nothing here' }));
+        dots(STAGES.indexOf(st) + 1, STAGES.length, c, 24))) : h('div', { class: 'empty', text: 'Nothing here' })));
   });
   const board = jobs.length || isStaff() ? h('div', { class: 'board' }, cols) : h('div', { class: 'panel empty', text: 'No jobs assigned to you yet. Your manager will assign one.' });
   if (!isStaff()) return m.replaceChildren(header('My jobs'), board);
@@ -173,7 +173,7 @@ PAGES.workshop = async m => {
   m.replaceChildren(
     h('div', { class: 'head' }, h('div', {}, h('h1', {}, 'Welcome back, ', h('b', { text: first }), ' \u{1F44B}'), h('p', { text: 'Here\u2019s what\u2019s on the workshop floor right now.' })), h('span', { class: 'grow' }), h('button', { class: 'btn primary', id: 'new-job', text: 'New job card', onclick: () => newJob() })),
     h('div', { class: 'hero' }, h('div', { class: 'kpis', style: { marginBottom: 0, alignContent: 'start' } },
-      kpi('Open jobs', open, unassigned.length ? unassigned.length + ' unassigned' : null, 'warn', by('in_progress').length + by('qa').length + by('ready').length, 'var(--coral)', 'Past approval: repair, QA or ready'),
+      kpi('Open jobs', open, unassigned.length ? unassigned.length + ' unassigned' : null, 'warn', by('in_progress').length + by('qa').length + by('ready').length, 'var(--brand)', 'Past approval: repair, QA or ready'),
       kpi('Awaiting customer', by('quoted').length, null, '', by('quoted').length, 'var(--s-quoted)', 'Quotes sent, no answer yet'),
       kpi('Ready for pickup', by('ready').length, null, '', by('ready').length, 'var(--s-ready)', 'Waiting to be invoiced and paid'),
       kpi('Extra work', reappr.length, reappr.length ? 'urgent' : null, 'bad', reappr.length, 'var(--bad)', 'Added after the customer approved')), attn),
@@ -370,7 +370,7 @@ PAGES.reports = async m => {
     const el = (t, at) => { const e2 = document.createElementNS(NS, t); for (const k in at) e2.setAttribute(k, at[k]); return e2; };
     const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, width: '100%', role: 'img', 'aria-label': 'Daily collections' });
     svg.append(el('line', { x1: pad, x2: W - pad, y1: H - 28, y2: H - 28, stroke: 'rgba(60,45,30,.15)' }));
-    d.forEach((x, k) => { const bh = Math.max(3, (H - 66) * x.amount / mx), cx = pad + (k + .5) * slot; const rc = el('rect', { x: cx - bw / 2, y: H - 28 - bh, width: bw, height: bh, rx: 6, fill: 'var(--coral)' }); const tt = el('title', {}); tt.textContent = x.day + ': ' + kes(x.amount); rc.append(tt); svg.append(rc);
+    d.forEach((x, k) => { const bh = Math.max(3, (H - 66) * x.amount / mx), cx = pad + (k + .5) * slot; const rc = el('rect', { x: cx - bw / 2, y: H - 28 - bh, width: bw, height: bh, rx: 6, fill: 'var(--brand)' }); const tt = el('title', {}); tt.textContent = x.day + ': ' + kes(x.amount); rc.append(tt); svg.append(rc);
       const tx = el('text', { x: cx, y: H - 9, 'text-anchor': 'middle', 'font-size': 11, fill: 'rgba(60,45,30,.55)' }); tx.textContent = x.day.slice(5); svg.append(tx); });
     return d.length ? svg : h('div', { class: 'empty', text: 'No payments in this period yet.' });
   })();
@@ -378,7 +378,7 @@ PAGES.reports = async m => {
   m.replaceChildren(h('div', { class: 'head' }, h('div', {}, h('h1', { text: 'Reports' }), h('p', { text: 'How the workshop is earning, and where the money is.' })), h('span', { class: 'grow' }), days),
     h('div', { class: 'kpis', id: 'kpis' }, kpi('Collected', kes(r.collected), r.by_method.map(x => x.method + ' ' + kes(x.amount)).join(' · ') || 'No payments yet', rate / 100, 'var(--s-ready)'), kpi('Invoiced', kes(r.invoiced), plural(r.invoice_count, 'invoice') + ' · VAT ' + kes(r.vat_collected)), kpi('Still owed', kes(r.outstanding), plural(r.outstanding_count, 'unpaid invoice'), r.invoiced ? r.outstanding / r.invoiced : 0, 'var(--bad)'), kpi('Gross profit', kes(r.gross_profit), 'before VAT and overheads'), kpi('Avg. turnaround', r.avg_turnaround_hours == null ? 'No data' : r.avg_turnaround_hours + ' h', open + ' jobs open now'), kpi('Stock value', kes(r.stock_value), plural(r.low_stock, 'part') + ' low or out')),
     h('div', { class: 'two' }, h('div', { class: 'panel' }, h('h2', { text: 'Daily collections' }), chart),
-      h('div', { class: 'panel' }, h('h2', { text: 'Collection rate' }), ring(rate, 'var(--coral)', rate + '%', 'of invoiced is paid', 'Collection rate ' + rate + ' percent'))),
+      h('div', { class: 'panel' }, h('h2', { text: 'Collection rate' }), ring(rate, 'var(--brand)', rate + '%', 'of invoiced is paid', 'Collection rate ' + rate + ' percent'))),
     h('div', { class: 'two' }, h('div', { class: 'panel' }, h('h2', { text: 'Mechanics' }), tbl([['Mechanic'], ['Jobs finished', 1], ['Labour billed', 1], ['Avg. hours per job', 1]], r.mechanics.map(x => [x.name, x.jobs, kes(x.labour_revenue), x.avg_hours]))),
       h('div', { class: 'panel' }, h('h2', { text: 'Top parts by profit' }), tbl([['Part'], ['Qty', 1], ['Profit', 1]], r.top_parts.map(p => [p.name, p.qty, kes(p.profit)])))));
 };

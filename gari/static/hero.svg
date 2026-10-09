@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of a car on a workshop lift">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E2A30"/><stop offset=".55" stop-color="#17484F"/><stop offset="1" stop-color="#0A1D22"/></linearGradient>
+<radialGradient id="glow" cx=".72" cy=".42" r=".5"><stop offset="0" stop-color="#F2A33A" stop-opacity=".45"/><stop offset="1" stop-color="#F2A33A" stop-opacity="0"/></radialGradient>
+<linearGradient id="body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAF2F0"/><stop offset="1" stop-color="#9DB8B4"/></linearGradient>
+<linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F3138"/><stop offset="1" stop-color="#071519"/></linearGradient>
+<pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M80 0H0V80" fill="none" stroke="#fff" stroke-opacity=".05" stroke-width="2"/></pattern>
+</defs>
+<rect width="1600" height="900" fill="url(#bg)"/><rect width="1600" height="900" fill="url(#grid)"/><rect width="1600" height="900" fill="url(#glow)"/>
+<!-- back wall pegboard tools -->
+<g fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1180 140l70 70M1250 140l-70 70"/><circle cx="1290" cy="180" r="34"/><path d="M1370 130v110M1350 130h40"/>
+<path d="M1010 150h120M1010 190h90M1010 230h140"/></g>
+<!-- big gear -->
+<g transform="translate(1330 330)" fill="#fff" fill-opacity=".07"><circle r="120"/><g id="t"><rect x="-16" y="-150" width="32" height="46" rx="8"/></g>
+<use href="#t" transform="rotate(45)"/><use href="#t" transform="rotate(90)"/><use href="#t" transform="rotate(135)"/><use href="#t" transform="rotate(180)"/><use href="#t" transform="rotate(225)"/><use href="#t" transform="rotate(270)"/><use href="#t" transform="rotate(315)"/>
+<circle r="52" fill="#0E2A30"/></g>
+<!-- floor -->
+<path d="M0 700L1600 700V900H0Z" fill="url(#floor)"/><path d="M0 700H1600" stroke="#fff" stroke-opacity=".12" stroke-width="3"/>
+<g stroke="#F2A33A" stroke-opacity=".5" stroke-width="6" stroke-dasharray="46 30"><path d="M0 800H1600"/></g>
+<g transform="translate(340 0)">
+<!-- lift posts and arms -->
+<g fill="#274E55"><rect x="410" y="320" width="34" height="390" rx="10"/><rect x="1130" y="320" width="34" height="390" rx="10"/><rect x="380" y="690" width="94" height="22" rx="8"/><rect x="1100" y="690" width="94" height="22" rx="8"/></g>
+<g fill="#F2A33A"><rect x="420" y="520" width="240" height="22" rx="10"/><rect x="920" y="520" width="240" height="22" rx="10"/></g>
+<!-- car -->
+<g transform="translate(0 -6)">
+<ellipse cx="800" cy="716" rx="460" ry="16" fill="#000" fill-opacity=".3"/>
+<path d="M410 500c0-34 14-52 52-60l112-24c40-44 96-84 168-90h170c76 6 130 48 176 94l114 22c36 8 58 30 58 58v36c0 14-10 24-24 24H434c-14 0-24-10-24-24z" fill="url(#body)"/>
+<path d="M606 420c32-34 78-68 134-72h152c60 4 104 38 140 74z" fill="#16363C"/>
+<path d="M760 352v68M900 352v68" stroke="#EAF2F0" stroke-width="10"/>
+<rect x="470" y="508" width="110" height="10" rx="5" fill="#F2A33A"/><rect x="1038" y="494" width="96" height="14" rx="7" fill="#FFF3C9"/>
+<g><circle cx="590" cy="548" r="62" fill="#0B1417"/><circle cx="590" cy="548" r="34" fill="#9DB8B4"/><circle cx="590" cy="548" r="10" fill="#0B1417"/>
+<circle cx="1012" cy="548" r="62" fill="#0B1417"/><circle cx="1012" cy="548" r="34" fill="#9DB8B4"/><circle cx="1012" cy="548" r="10" fill="#0B1417"/></g>
+</g>
+<!-- number plate -->
+<g transform="translate(770 506)"><rect width="150" height="46" rx="8" fill="#fff" stroke="#14262B" stroke-width="4"/><text x="75" y="33" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-weight="700" font-size="26" letter-spacing="3" fill="#14262B">KDA 123A</text></g>
+</g>
+<!-- job card floating -->
+<g transform="translate(760 120) rotate(-4)"><rect width="260" height="150" rx="22" fill="#fff" fill-opacity=".95"/><rect x="22" y="24" width="82" height="20" rx="10" fill="#0F7F78" fill-opacity=".2"/><rect x="22" y="62" width="180" height="12" rx="6" fill="#14262B" fill-opacity=".7"/><rect x="22" y="86" width="130" height="10" rx="5" fill="#14262B" fill-opacity=".25"/>
+<g fill="#0F7F78">
+<circle cx="26" cy="124" r="3.5"/><circle cx="40" cy="124" r="3.5"/><circle cx="54" cy="124" r="3.5"/><circle cx="68" cy="124" r="3.5"/><circle cx="82" cy="124" r="3.5"/><circle cx="96" cy="124" r="3.5"/></g>
+<g fill="#14262B" fill-opacity=".15"><circle cx="110" cy="124" r="3.5"/><circle cx="124" cy="124" r="3.5"/><circle cx="138" cy="124" r="3.5"/><circle cx="152" cy="124" r="3.5"/><circle cx="166" cy="124" r="3.5"/><circle cx="180" cy="124" r="3.5"/></g></g>
+</svg>
